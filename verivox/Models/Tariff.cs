@@ -9,22 +9,23 @@ namespace verivox.Models
     public class Tariff
     {
         public string Name { get; set; }
+        public string Description { get; set; }
         public double AnnualCosts { get; set; }
 
-        public void CalculateAnnualCosts(double input)
+        public void CalculateAnnualCosts(double value)
         {
             switch (Name)
             {
                 case "Basic electricity tariff":
-                    AnnualCosts = input * 0.22  >60 ? input * 0.22 : 60;
+                    AnnualCosts = value * 0.22  >60 ? value * 0.22 : 60;
                     break;
 
                 case "Packaged tariff":
-                    AnnualCosts = input < 4000 ? 800 : ((800)+((input - 4000)*.30));
+                    AnnualCosts = value < 4000 ? 800 : ((800)+((value - 4000)*.30));
                     break;
 
                 default:
-                    Console.WriteLine($"Measured value i; too low.");
+                    AnnualCosts = 0;
                     break;
             }
 
