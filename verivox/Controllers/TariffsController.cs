@@ -14,8 +14,10 @@ namespace verivox.Controllers
         public List<Tariff> Tariffs = new List<Tariff>()
         { 
             new Tariff{Name="Basic electricity tariff",Description="base costs per month 5 € + consumption costs 22 cent/kWh"},
+            new Tariff{Name="Basic electrsssicity tariff",Description="base costs per month 5 € + consumption costs 22 cent/kWh"},
             new Tariff{Name="Packaged tariff",Description="800 € for up to 4000 kWh/year and above 4000 kWh/year additionally 30"}
         };
+  
 
         [HttpGet]
         public List<Tariff> Get()
@@ -30,7 +32,7 @@ namespace verivox.Controllers
         }
 
         [HttpGet("calc/{field}/{value}")]
-        public IEnumerable<Object> CalculateTariffs(string field, double value)
+        public List<Tariff> CalculateTariffs(string field, double value)
         {
             switch (field)
             {
@@ -41,8 +43,8 @@ namespace verivox.Controllers
                     }
                     break;
             }
-            List<Tariff> SortedTariff = Tariffs.OrderBy(o => o.AnnualCosts).ToList();
-            return SortedTariff.Select(p => new { p.Name, p.AnnualCosts }); ;
+            List<Tariff> SortedTariff = Tariffs.Where(x=>x.AnnualCosts!=0).OrderBy(o => o.AnnualCosts).ToList();
+            return SortedTariff;
 
         }
     }

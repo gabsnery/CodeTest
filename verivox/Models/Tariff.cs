@@ -23,7 +23,6 @@ namespace verivox.Models
                 case "Packaged tariff":
                     AnnualCosts = value < 4000 ? 800 : ((800)+((value - 4000)*.30));
                     break;
-
                 default:
                     AnnualCosts = 0;
                     break;
